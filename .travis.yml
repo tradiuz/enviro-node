@@ -10,8 +10,11 @@ matrix:
 before_install:
   - python -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/develop/scripts/get-platformio.py)"
 install:
+  - pip install coveralls
   - platformio lib -g install "ESP8266WiFi"
   - platformio lib -g install "DHT sensor library"
   - platformio lib -g install "PubSubClient"
 script:
-  - platformio ci enviro-node.ino -b $BOARD
+  - coverage run -m platformio ci enviro-node.ino -b $BOARD
+after_success:
+  - coveralls
