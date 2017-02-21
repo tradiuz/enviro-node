@@ -15,6 +15,6 @@ install:
   - platformio lib -g install "DHT sensor library"
   - platformio lib -g install "PubSubClient"
 script:
-  - coverage run platformio ci enviro-node.ino -b $BOARD
+  - coverage run -m platformio ci enviro-node.ino -b $BOARD
 after_success:
   - coveralls
