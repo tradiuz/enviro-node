@@ -1,4 +1,12 @@
 language: python
+matrix:
+  fast_finish: true
+  include:
+    - env: BOARD="d1_mini"
+    - env: BOARD="esp01"
+    - env: BOARD="nodemcuv2"
+  allow_failures:
+    - env: BOARD="esp01"
 before_install:
   - python -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/develop/scripts/get-platformio.py)"
 install:
@@ -6,4 +14,4 @@ install:
   - platformio lib -g install "DHT sensor library"
   - platformio lib -g install "PubSubClient"
 script:
-  - platformio ci enviro-node.ino -b d1_mini
+  - platformio ci enviro-node.ino -b $BOARD
